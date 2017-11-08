@@ -1,0 +1,13 @@
+version: '2'
+services:
+    apmwebapp-app:
+        image: apmwebapp
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATA_MONGODB_URI=mongodb://apmwebapp-mongodb:27017
+            - SPRING_DATA_MONGODB_DATABASE=apmWebapp
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+    apmwebapp-mongodb:
+        extends:
+            file: mongodb.yml
+            service: apmwebapp-mongodb
