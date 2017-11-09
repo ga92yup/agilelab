@@ -1,12 +1,5 @@
-FROM openjdk:8-jre-alpine
-
-ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
-    JHIPSTER_SLEEP=0 \
-    JAVA_OPTS=""
-
-ADD *.war /app.war
-
-EXPOSE 8081
-CMD echo "The application will start in ${JHIPSTER_SLEEP}s..." && \
-    sleep ${JHIPSTER_SLEEP} && \
-    java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -jar /app.war
+FROM openjdk:8-jdk-alpine
+VOLUME /tmp
+ADD target/AGP-Project-0.1.0.jar app.jar
+ENV JAVA_OPTS=""
+ENTRYPOINT exec java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar
